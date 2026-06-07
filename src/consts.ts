@@ -18,6 +18,7 @@ export const SITE = {
 // Primary navigation — appears in the side rail (desktop) and top bar (mobile).
 export const NAV = [
   { label: 'home', href: '/' },
+  { label: 'whoami', href: '/whoami' },
   { label: 'projects', href: '/projects' },
   { label: 'blog', href: '/blog' },
 ];
@@ -26,7 +27,7 @@ export const NAV = [
 // Remove any you don't want; add more by copying a line.
 export const SOCIALS = [
   { label: 'GitHub', href: 'https://github.com/itsdiy0', icon: 'github' },
-  { label: 'X', href: 'https://x.com/', icon: 'x' },
-  { label: 'LinkedIn', href: 'https://linkedin.com/in/', icon: 'linkedin' },
-  { label: 'Email', href: 'mailto:you@diy0.dev', icon: 'mail' },
+  { label: 'X', href: 'https://x.com/itsdiy0', icon: 'x' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/mobin-rajaei', icon: 'linkedin' },
+  { label: 'Email', href: 'mailto:mobin.rajaei@outlook.com', icon: 'mail' },
 ];

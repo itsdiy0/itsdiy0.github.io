@@ -25,7 +25,7 @@
   --text-faint: #6a6a70;
   --border: rgba(255, 255, 255, 0.1);
   --border-strong: rgba(255, 255, 255, 0.22);
-  --accent: #e8a06a;
+  --accent: #55efc4;
   --accent-soft: rgba(232, 160, 106, 0.14);
 }
 
@@ -38,7 +38,7 @@
   --text-faint: #9a9aa1;
   --border: rgba(0, 0, 0, 0.12);
   --border-strong: rgba(0, 0, 0, 0.26);
-  --accent: #c06a2e;
+  --accent: #00b894;
   --accent-soft: rgba(192, 106, 46, 0.1);
 }
 
