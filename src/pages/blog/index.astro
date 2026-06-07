@@ -1,0 +1,92 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/-/g, ' · ');
+---
+
+<Base title="blog" description="Notes on things I'm learning.">
+  <section class="wrap">
+    <header class="head rise">
+      <p class="mono">writing</p>
+      <h1>Blog</h1>
+    </header>
+
+    {
+      posts.length === 0 ? (
+        <p class="empty">No posts yet — add a Markdown file to src/content/blog/.</p>
+      ) : (
+        <ul class="list rise" style="animation-delay: 0.08s">
+          {posts.map((post) => (
+            <li>
+              <a href={`/blog/${post.id}`}>
+                <time class="mono" datetime={post.data.date.toISOString()}>
+                  {fmt(post.data.date)}
+                </time>
+                <h2>{post.data.title}</h2>
+                {post.data.description && <p class="excerpt">{post.data.description}</p>}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+</Base>
+
+<style>
+  .wrap {
+    width: 100%;
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: clamp(3rem, 8vh, 6rem) 1.5rem 4rem;
+  }
+  .head {
+    margin-bottom: 1.5rem;
+  }
+  .head h1 {
+    font-size: clamp(1.7rem, 3.5vw, 2.2rem);
+    margin-top: 4px;
+  }
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .list li {
+    border-top: 1px solid var(--border);
+  }
+  .list li:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+  .list a {
+    display: block;
+    padding: 20px 0;
+  }
+  .list a:hover h2 {
+    color: var(--accent);
+  }
+  .list time {
+    display: block;
+  }
+  .list h2 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 5px 0 0;
+    transition: color 0.18s var(--ease);
+  }
+  .excerpt {
+    margin: 5px 0 0;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+  }
+  .empty {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+</style>

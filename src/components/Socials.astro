@@ -1,0 +1,54 @@
+---
+import { Icon } from 'astro-icon/components';
+import { SOCIALS } from '../consts';
+
+const iconMap: Record<string, string> = {
+  github: 'tabler:brand-github',
+  x: 'tabler:brand-x',
+  twitter: 'tabler:brand-x',
+  linkedin: 'tabler:brand-linkedin',
+  mail: 'tabler:mail',
+  rss: 'tabler:rss',
+  mastodon: 'tabler:brand-mastodon',
+  bluesky: 'tabler:brand-bluesky',
+};
+---
+
+<ul class="socials">
+  {
+    SOCIALS.map((s) => (
+      <li>
+        <a
+          href={s.href}
+          aria-label={s.label}
+          rel="me noopener"
+          target={s.href.startsWith('mailto:') ? undefined : '_blank'}
+        >
+          <Icon name={iconMap[s.icon] ?? 'tabler:link'} />
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .socials {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .socials a {
+    color: var(--text-muted);
+    display: inline-grid;
+    place-items: center;
+  }
+  .socials a:hover {
+    color: var(--accent);
+  }
+  .socials :global(svg) {
+    width: 20px;
+    height: 20px;
+  }
+</style>

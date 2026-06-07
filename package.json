@@ -1,0 +1,20 @@
+{
+  "name": "diy0-dev",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.18",
+    "@fontsource-variable/hanken-grotesk": "^5.2.8",
+    "@fontsource/jetbrains-mono": "^5.2.8",
+    "@iconify-json/tabler": "^1.2.35",
+    "astro": "^6.4.4",
+    "astro-icon": "^1.1.5"
+  }
+}

@@ -1,0 +1,151 @@
+---
+import { Icon } from 'astro-icon/components';
+import { SITE, NAV } from '../consts';
+
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isActive = (href: string) => {
+  const clean = href.replace(/\/+$/, '') || '/';
+  return clean === '/' ? path === '/' : path === clean || path.startsWith(clean + '/');
+};
+---
+
+<header class="rail">
+  <a href="/" class="wordmark mono" aria-label={`${SITE.name} — home`}>{SITE.wordmark}</a>
+
+  <nav aria-label="Primary">
+    <ul>
+      {
+        NAV.map((item) => (
+          <li>
+            <a href={item.href} class:list={['nav-link', { active: isActive(item.href) }]}>
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+
+  <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle colour theme">
+    <Icon name="tabler:sun" class="i-sun" />
+    <Icon name="tabler:moon" class="i-moon" />
+  </button>
+</header>
+
+<style>
+  .rail {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: var(--rail-width);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 0;
+    border-right: 1px solid var(--border);
+    background: var(--bg);
+    z-index: 20;
+  }
+
+  .wordmark {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: 0.02em;
+    text-transform: none;
+  }
+  .wordmark:hover {
+    color: var(--accent);
+  }
+
+  nav {
+    margin: auto 0;
+  }
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    text-align: center;
+  }
+  .nav-link {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    position: relative;
+  }
+  .nav-link:hover {
+    color: var(--text);
+  }
+  .nav-link.active {
+    color: var(--text);
+  }
+  .nav-link.active::before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: color 0.18s var(--ease), border-color 0.18s var(--ease);
+  }
+  .theme-toggle:hover {
+    color: var(--text);
+    border-color: var(--border-strong);
+  }
+  .theme-toggle :global(svg) {
+    width: 17px;
+    height: 17px;
+  }
+  .i-moon {
+    display: none;
+  }
+  :global(:root[data-theme='light']) .i-sun {
+    display: none;
+  }
+  :global(:root[data-theme='light']) .i-moon {
+    display: block;
+  }
+
+  /* Mobile: rail folds up into a horizontal top bar */
+  @media (max-width: 768px) {
+    .rail {
+      inset: 0 0 auto 0;
+      width: 100%;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+    nav {
+      margin: 0 auto 0 auto;
+    }
+    nav ul {
+      flex-direction: row;
+      gap: 18px;
+    }
+    .nav-link.active::before {
+      left: 50%;
+      top: auto;
+      bottom: -7px;
+      transform: translateX(-50%);
+    }
+  }
+</style>

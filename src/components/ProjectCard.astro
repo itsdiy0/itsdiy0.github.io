@@ -1,0 +1,117 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  title: string;
+  summary: string;
+  stack: string[];
+  cover?: string;
+  repo?: string;
+  live?: string;
+}
+
+const { title, summary, stack, cover, repo, live } = Astro.props;
+---
+
+<article class="card">
+  {cover && <img class="cover" src={cover} alt={`${title} screenshot`} loading="lazy" />}
+  <div class="body">
+    <h2>{title}</h2>
+    <p class="summary">{summary}</p>
+    {
+      stack.length > 0 && (
+        <ul class="stack">
+          {stack.map((tag) => (
+            <li class="mono">{tag}</li>
+          ))}
+        </ul>
+      )
+    }
+    <div class="links">
+      {
+        repo && (
+          <a href={repo} target="_blank" rel="noopener" aria-label="Source code">
+            <Icon name="tabler:brand-github" />
+          </a>
+        )
+      }
+      {
+        live && (
+          <a href={live} target="_blank" rel="noopener" aria-label="Live site">
+            <Icon name="tabler:external-link" />
+          </a>
+        )
+      }
+    </div>
+  </div>
+</article>
+
+<style>
+  .card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.2s var(--ease), transform 0.2s var(--ease);
+  }
+  .card:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-2px);
+  }
+  .cover {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-bottom: 1px solid var(--border);
+  }
+  .body {
+    padding: 16px 18px 14px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+  .summary {
+    margin: 6px 0 0;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+  .stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    list-style: none;
+    margin: 14px 0 0;
+    padding: 0;
+  }
+  .stack li {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1px 7px;
+    color: var(--text-muted);
+  }
+  .links {
+    display: flex;
+    gap: 14px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+  .links:empty {
+    display: none;
+  }
+  .links a:hover {
+    color: var(--accent);
+  }
+  .links :global(svg) {
+    width: 18px;
+    height: 18px;
+  }
+</style>
