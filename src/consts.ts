@@ -12,7 +12,7 @@ export const SITE = {
   /** Used for <title>, meta description, and RSS. */
   description: 'Personal site, projects and writing by Mobin Rajaei.',
   /** Path to your avatar in /public. Swap in a real photo (e.g. avatar.jpg) and update this. */
-  avatar: '/avatar.svg',
+  avatar: '/avatar.jpeg',
 };
 
 // Primary navigation — appears in the side rail (desktop) and top bar (mobile).

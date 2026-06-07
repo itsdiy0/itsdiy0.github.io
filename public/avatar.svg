@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <rect width="128" height="128" fill="#141416"/>
-  <circle cx="64" cy="50" r="24" fill="#2a2a2e"/>
-  <path d="M24 116c0-22 18-36 40-36s40 14 40 36z" fill="#2a2a2e"/>
-  <text x="64" y="124" font-family="ui-monospace, monospace" font-size="7" fill="#6a6a70" text-anchor="middle">replace /avatar</text>
-</svg>
